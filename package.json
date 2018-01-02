@@ -1,0 +1,19 @@
+{
+  "name": "yelpcamp",
+  "version": "1.0.0",
+  "description": "A CRUD app for campgrounds",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buchheimt/YelpCamp.git"
+  },
+  "author": "Tyler Buchheim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/buchheimt/YelpCamp/issues"
+  },
+  "homepage": "https://github.com/buchheimt/YelpCamp#readme"
+}
