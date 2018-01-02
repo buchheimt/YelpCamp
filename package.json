@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/buchheimt/YelpCamp/issues"
   },
-  "homepage": "https://github.com/buchheimt/YelpCamp#readme"
+  "homepage": "https://github.com/buchheimt/YelpCamp#readme",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.2"
+  }
 }
