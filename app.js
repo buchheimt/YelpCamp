@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
 
+app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
 
@@ -16,6 +18,15 @@ app.get("/", (req, res) => {
 
 app.get("/campgrounds", (req, res) => {
   res.render("campgrounds", {campgrounds})
+});
+
+app.post("/campgrounds", (req, res) => {
+  campgrounds.push({name: req.body.name, image: req.body.image});
+  res.redirect("/campgrounds");
+});
+
+app.get("/campgrounds/new", (req, res) => {
+  res.render("new.ejs");
 });
 
 app.listen(3000, () => console.log("YelpCamp server running on port 3000"));
