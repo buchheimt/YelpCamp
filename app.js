@@ -2,9 +2,11 @@ const express     = require("express"),
       app         = express(),
       bodyParser  = require("body-parser"),
       mongoose    = require("mongoose"),
-      Campground  = require("./models/campground");
+      Campground  = require("./models/campground"),
+      seedDB      = require("./seeds");
 
 
+seedDB();
 mongoose.connect("mongodb://localhost/yelp_camp");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -43,10 +45,11 @@ app.get("/campgrounds/new", (req, res) => {
 });
 
 app.get("/campgrounds/:id", (req, res) => {
-  Campground.findById(req.params.id, (err, campground) => {
+  Campground.findById(req.params.id).populate("comments").exec((err, campground) => {
     if (err) {
       console.log(err);
     } else {
+      console.log(campground);
       res.render("show", {campground});
     }
   });
