@@ -18,6 +18,7 @@ router.get("/", (req, res) => {
 router.post("/", middleware.isLoggedIn, (req, res) => {
   const campgroundData = {
     name: req.body.name,
+    price: req.body.price,
     image: req.body.image,
     description: req.body.description,
     author: {
@@ -42,7 +43,7 @@ router.get("/new", middleware.isLoggedIn, (req, res) => {
 // campground#show
 router.get("/:id", (req, res) => {
   Campground.findById(req.params.id).populate("comments").exec((err, campground) => {
-    if (err || !comment) {
+    if (err || !campground) {
       console.log(err);
       req.flash("error", "Sorry, that campground does not exist");
       return res.redirect("/campgrounds");
