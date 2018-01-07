@@ -42,13 +42,7 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
 
 // comment#edit
 router.get("/:commentId/edit", middleware.checkCommentOwnership, (req, res) => {
-  Comment.findById(req.params.commentId, (err, comment) => {
-    if (err) {
-      res.redirect("back");
-    } else {
-      res.render("comments/edit", {campgroundId: req.params.id, comment});
-    }
-  });
+  res.render("comments/edit", {campgroundId: req.params.id, comment: req.comment});
 });
 
 // comment#update

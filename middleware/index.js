@@ -6,16 +6,15 @@ const middlewareObj = {};
 middlewareObj.checkCampgroundOwnership = (req, res, next) => {
   if (req.isAuthenticated()) {
     Campground.findById(req.params.id, (err, campground) => {
-      if (err) {
+      if (err || !campground) {
         req.flash("error", "Campground not found");
         res.redirect("back");
+      } else if (campground.author.id.equals(req.user._id)) {
+        req.campground = campground;
+        next();
       } else {
-        if (campground.author.id.equals(req.user._id)) {
-          next();
-        } else {
-          req.flash("error", "You don't have permission to do that");
-          res.redirect("back");
-        }
+        req.flash("error", "You don't have permission to do that");
+        res.redirect("/campgrounds/" + req.params.id);
       }
     });
   } else {
@@ -27,16 +26,15 @@ middlewareObj.checkCampgroundOwnership = (req, res, next) => {
 middlewareObj.checkCommentOwnership = (req, res, next) => {
   if (req.isAuthenticated()) {
     Comment.findById(req.params.commentId, (err, comment) => {
-      if (err) {
+      if (err || !comment) {
         req.flash("error", "Comment not found");
         res.redirect("back");
+      } else if (comment.author.id.equals(req.user._id)) {
+        req.comment = comment;
+        next();
       } else {
-        if (comment.author.id.equals(req.user._id)) {
-          next();
-        } else {
-          req.flash("error", "You don't have permission to do that");
-          res.redirect("back");
-        }
+        req.flash("error", "You don't have permission to do that");
+        res.redirect("/campgrounds/" + req.params.id);
       }
     });
   } else {
