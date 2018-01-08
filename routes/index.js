@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
 
 // user#new
 router.get("/register", (req, res) => {
-  res.render("register");
+  res.render("register", {page: "register"});
 });
 
 // user#create
@@ -32,7 +32,7 @@ router.post("/register", (req, res) => {
 
 // session#new
 router.get("/login", (req, res) => {
-  res.render("login");
+  res.render("login", {page: "login"});
 });
 
 // session#create
